@@ -8,30 +8,33 @@
 
 import UIKit
 
+//MARK: - Constants
 extension UIImage {
-    func isPlaceholder() -> Bool {
-        return self == UIImage(named: "UserPlaceholder")
+    class func userPlaceholder() -> UIImage {
+        guard let image = UIImage(named: "UserPlaceholder") else {
+            fatalError("UserPlaceholder image unwrapping error")
+        }
+        return image
     }
     
-    func imageData(maxFileSizeMB: Float) -> Data? {
-        var compression: CGFloat = 1
-        let maxCompression: CGFloat = 0.1
-        let maxFileSize = Int(maxFileSizeMB * 1024 * 1024)
-        
-        var imageData = self.jpegData(compressionQuality: compression)
-        
-        while ((imageData?.count) ?? 0 > maxFileSize && compression > maxCompression) {
-            compression -= 0.1
-            imageData = self.jpegData(compressionQuality: compression)
+    class func picturePlaceholder() -> UIImage {
+        guard let image = UIImage(named: "PicturePlaceholder") else {
+            fatalError("PicturePlaceholder image unwrapping error")
         }
-        
-        return imageData
+        return image
+    }
+}
+
+//MARK: - Helpers
+extension UIImage {
+    func isPlaceholder() -> Bool {
+        return self == UIImage.userPlaceholder() || self == UIImage.picturePlaceholder()
     }
     
     func resizeImage(maxSide: CGFloat = 1024.0) -> UIImage? {
     
-        let actualHeight = self.size.height
-        let actualWidth = self.size.width
+        let actualHeight = size.height
+        let actualWidth = size.width
         
         if (actualWidth <= maxSide && actualHeight <= maxSide) {
             return self
@@ -51,7 +54,7 @@ extension UIImage {
         
         let rect = CGRect(x: 0.0, y: 0.0, width: newWidth, height: newHeight)
         UIGraphicsBeginImageContext(rect.size)
-        self.draw(in: rect)
+        draw(in: rect)
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         

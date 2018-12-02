@@ -24,7 +24,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet private weak var signInButton: UIButton!
     @IBOutlet private weak var activityView: UIActivityIndicatorView!
     
-    let imagePicker = UIImagePickerController()
+    private let imagePicker = UIImagePickerController()
 }
 
 //MARK: - Lifecycle

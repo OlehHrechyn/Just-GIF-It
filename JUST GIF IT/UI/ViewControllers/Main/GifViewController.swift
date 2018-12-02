@@ -32,15 +32,31 @@ extension GifViewController {
     }
 }
 
+
 //MARK: - Private
 private extension GifViewController {
     func setupLogic() {
+        gifImageView.delegate = self
+        setupGif()
+    }
+    
+    func setupGif() {
         DispatchQueue.main.async { [weak self] in
             self?.gifActivityView.start()
+            
+            APIManager.getGifLink { (url, error) in
+                if let error = error {
+                    self?.gifActivityView.stop()
+                    self?.showAlert(error: error)
+                } else if let url = url {
+                    self?.gifImageView.setGifFromURL(url, showLoader: false)
+                } else {
+                    self?.gifActivityView.stop()
+                }
+            }
+            
+            
         }
-        let url = URL(string: "https://media.giphy.com/media/l3vR92g7FWGIYhzC8/giphy.gif")
-        gifImageView.setGifFromURL(url, showLoader: false)
-        gifImageView.delegate = self
     }
     
     func setupUI() {

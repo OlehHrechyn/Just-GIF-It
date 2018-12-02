@@ -13,6 +13,7 @@ import SwiftyJSON
 
 //MARK: - Auth Functionality
 extension APIManager {
+    typealias UserModelCompletion = (_ user: User?, _ error: Error?) -> Void
     
     final class func login(email: String, password: String, completion: @escaping UserModelCompletion) {
         let url = baseUrl + EndPoint.auth.login.rawValue
@@ -20,25 +21,13 @@ extension APIManager {
         parameters["email"] = email
         parameters["password"] = password
         
-        Alamofire.request(url, method: .post, parameters: parameters).responseJSON { (responseObject) in
-            guard responseObject.result.isSuccess else {
-                completion(nil, responseObject.error)
+        APIManager.request(url: url, method: .post, parameters: parameters) { (response, error) in
+            guard let response = response else {
+                completion(nil, error)
                 return
             }
-            guard let response = responseObject.result.value as? [String : Any] else {
-                completion(nil, InternalError.JSONParseError)
-                return
-            }
-            
-            let errorMessage = APIManager.loginErrorMessage(response: response)
-            if errorMessage.isEmpty {
-                completion(User(JSON: response), nil)
-            } else {
-                completion(nil, InternalError.custom(errorMessage))
-            }
-            
+            completion(User(JSON: response), nil)
         }
-        
     }
     
     final class func register(username: String, email: String, password: String, avatar: UIImage, completion: @escaping UserModelCompletion) {
@@ -68,11 +57,7 @@ extension APIManager {
 
 //MARK: - Response errors
 extension APIManager {
-    final class func loginErrorMessage(response: [String:Any]) -> String {
-        return response["error"] as? String ?? ""
-    }
-    
-    final class func registrationErrorMessage(response: [String:Any]) -> String {
+    final class func registrationErrorMessage(response: [String: Any]) -> String {
         var errorMessages = [String]()
         let json = JSON(arrayLiteral: response)
         

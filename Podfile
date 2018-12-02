@@ -9,5 +9,5 @@ target 'JUST GIF IT' do
   pod 'KeychainSwift', '~> 13.0'
   pod 'IQKeyboardManagerSwift'
   pod 'SwiftyGif'
-
+  pod 'Kingfisher', '~> 4.0'
 end

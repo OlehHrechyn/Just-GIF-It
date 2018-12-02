@@ -16,6 +16,12 @@
 		8B24E3B721ACA828007D323E /* UINavigationBar+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B24E3B621ACA828007D323E /* UINavigationBar+Extension.swift */; };
 		8B24E3B921ACB510007D323E /* NewImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B24E3B821ACB510007D323E /* NewImageViewController.swift */; };
 		8B24E3BB21ACB53A007D323E /* GifViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B24E3BA21ACB53A007D323E /* GifViewController.swift */; };
+		8B2CB3D221B42487000974AE /* APIManager+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2CB3D121B42487000974AE /* APIManager+Image.swift */; };
+		8B2CB3D421B42914000974AE /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2CB3D321B42914000974AE /* ImageManager.swift */; };
+		8B2CB3D621B430F0000974AE /* ServerImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2CB3D521B430F0000974AE /* ServerImage.swift */; };
+		8B2CB3DA21B44402000974AE /* GalleryImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2CB3D821B44402000974AE /* GalleryImageCell.swift */; };
+		8B2CB3DB21B44402000974AE /* GalleryImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B2CB3D921B44402000974AE /* GalleryImageCell.xib */; };
+		8B2CB3DD21B46607000974AE /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2CB3DC21B46607000974AE /* LocationManager.swift */; };
 		8B45B5EA21B093F5002F6458 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B45B5E921B093F5002F6458 /* KeychainManager.swift */; };
 		8B45B5EC21B0B728002F6458 /* SegueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B45B5EB21B0B728002F6458 /* SegueManager.swift */; };
 		8B6E1C0C21AB7E8000C03489 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6E1C0B21AB7E8000C03489 /* UIViewController+Extension.swift */; };
@@ -50,6 +56,12 @@
 		8B24E3B621ACA828007D323E /* UINavigationBar+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Extension.swift"; sourceTree = "<group>"; };
 		8B24E3B821ACB510007D323E /* NewImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewImageViewController.swift; sourceTree = "<group>"; };
 		8B24E3BA21ACB53A007D323E /* GifViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifViewController.swift; sourceTree = "<group>"; };
+		8B2CB3D121B42487000974AE /* APIManager+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIManager+Image.swift"; sourceTree = "<group>"; };
+		8B2CB3D321B42914000974AE /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
+		8B2CB3D521B430F0000974AE /* ServerImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerImage.swift; sourceTree = "<group>"; };
+		8B2CB3D821B44402000974AE /* GalleryImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryImageCell.swift; sourceTree = "<group>"; };
+		8B2CB3D921B44402000974AE /* GalleryImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryImageCell.xib; sourceTree = "<group>"; };
+		8B2CB3DC21B46607000974AE /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		8B45B5E921B093F5002F6458 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
 		8B45B5EB21B0B728002F6458 /* SegueManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueManager.swift; sourceTree = "<group>"; };
 		8B6E1C0B21AB7E8000C03489 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
@@ -123,10 +135,20 @@
 			path = Other;
 			sourceTree = "<group>";
 		};
+		8B2CB3D721B443CF000974AE /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8B2CB3D821B44402000974AE /* GalleryImageCell.swift */,
+				8B2CB3D921B44402000974AE /* GalleryImageCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		8B959FC821B334D200638B2E /* Mappable */ = {
 			isa = PBXGroup;
 			children = (
 				8B959FC921B334F100638B2E /* User.swift */,
+				8B2CB3D521B430F0000974AE /* ServerImage.swift */,
 			);
 			path = Mappable;
 			sourceTree = "<group>";
@@ -160,6 +182,7 @@
 			children = (
 				8B0E699A21ADF50E0041DF5E /* APIManager.swift */,
 				8B99D95C21B41B9E00A3B518 /* APIManager+Auth.swift */,
+				8B2CB3D121B42487000974AE /* APIManager+Image.swift */,
 			);
 			path = APImanager;
 			sourceTree = "<group>";
@@ -201,6 +224,7 @@
 				8BCD356021AAEB2800A2A634 /* Storyboards */,
 				8BCD355C21AAE5F500A2A634 /* ViewControllers */,
 				8B96C36321AB2DCA00F26A6D /* Views */,
+				8B2CB3D721B443CF000974AE /* Cells */,
 				8B24E3B321AC9AF7007D323E /* Other */,
 			);
 			path = UI;
@@ -241,6 +265,8 @@
 				8BCD356C21AAED1600A2A634 /* AppManager.swift */,
 				8B45B5E921B093F5002F6458 /* KeychainManager.swift */,
 				8BCD356F21AAF79600A2A634 /* UserManager.swift */,
+				8B2CB3D321B42914000974AE /* ImageManager.swift */,
+				8B2CB3DC21B46607000974AE /* LocationManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -325,6 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BC6586C21AB0A13005EA71A /* Login.storyboard in Resources */,
+				8B2CB3DB21B44402000974AE /* GalleryImageCell.xib in Resources */,
 				8BCD356A21AAECC900A2A634 /* Main.storyboard in Resources */,
 				8BCD354F21AAD49400A2A634 /* Assets.xcassets in Resources */,
 				8BCD356921AAECC900A2A634 /* LaunchScreen.storyboard in Resources */,
@@ -368,6 +395,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyGif/SwiftyGif.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -379,6 +407,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyGif.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -397,14 +426,18 @@
 			files = (
 				8B24E3B521ACA727007D323E /* CAGradientLayer +Extension.swift in Sources */,
 				8B91A47821AE15F500387502 /* UIActivityIndicatorView+Extension.swift in Sources */,
+				8B2CB3DD21B46607000974AE /* LocationManager.swift in Sources */,
 				8B96C36821AB3ED600F26A6D /* UITextField+Extension.swift in Sources */,
+				8B2CB3D421B42914000974AE /* ImageManager.swift in Sources */,
 				8B99D95621B36AA100A3B518 /* UIImage+Extension.swift in Sources */,
 				8B6E1C0C21AB7E8000C03489 /* UIViewController+Extension.swift in Sources */,
+				8B2CB3D621B430F0000974AE /* ServerImage.swift in Sources */,
 				8B96C36521AB349500F26A6D /* CALayer+Extenstion.swift in Sources */,
 				8B96C36221AB2DC700F26A6D /* AvatarImageView.swift in Sources */,
 				8B96C36A21AB3FAA00F26A6D /* UIButton+Extension.swift in Sources */,
 				8B0E69A021AE0BF90041DF5E /* InternalError.swift in Sources */,
 				8BCD355F21AAEB1300A2A634 /* LoginViewController.swift in Sources */,
+				8B2CB3DA21B44402000974AE /* GalleryImageCell.swift in Sources */,
 				8B24E3BB21ACB53A007D323E /* GifViewController.swift in Sources */,
 				8B0E699921ADEC0D0041DF5E /* String+Extension.swift in Sources */,
 				8B24E3B721ACA828007D323E /* UINavigationBar+Extension.swift in Sources */,
@@ -415,6 +448,7 @@
 				8BCD355A21AAE5E800A2A634 /* GalleryViewController.swift in Sources */,
 				8BCD357221AB07E400A2A634 /* RegisterViewController.swift in Sources */,
 				8B99D95D21B41B9E00A3B518 /* APIManager+Auth.swift in Sources */,
+				8B2CB3D221B42487000974AE /* APIManager+Image.swift in Sources */,
 				8BCD357021AAF79600A2A634 /* UserManager.swift in Sources */,
 				8BCD356D21AAED1600A2A634 /* AppManager.swift in Sources */,
 				8B959FCA21B334F100638B2E /* User.swift in Sources */,

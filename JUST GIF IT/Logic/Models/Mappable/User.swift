@@ -10,19 +10,18 @@ import Foundation
 import ObjectMapper
 
 struct User: Mappable {
+    var creationTime: String?
     var token: String?
     var avatar: String?
-    
-    var errorMessage: String?
     
     init?(map: Map){
         
     }
     
     mutating func mapping(map: Map) {
-        token <- map["token"]
-        avatar <- map["avatar"]
-        errorMessage <- map["error"]
+        creationTime    <- map["creation_time"]
+        token           <- map["token"]
+        avatar          <- map["avatar"]
     }
 }
 

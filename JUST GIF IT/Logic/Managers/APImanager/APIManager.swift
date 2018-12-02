@@ -11,10 +11,10 @@ import Alamofire
 
 typealias ErrorCompletion = (_ error: Error?) -> Void
 typealias RequestCompletion = (_ response: [String: Any]?, _ error: Error?) -> Void
-typealias UserModelCompletion = (_ user: User?, _ error: Error?) -> Void
 
 class APIManager {
     static let baseUrl = "http://api.doitserver.in.ua"
+    static let tokenKey = "token"
     
     enum EndPoint {
         enum auth: String {
@@ -31,10 +31,32 @@ class APIManager {
     
 }
 
-//MARK: - Common
+//MARK: - Common methods
 extension APIManager {
-    final class func upload(url: URLConvertible, parameters: Parameters, method: HTTPMethod = .post, headers: HTTPHeaders = [:], completion: @escaping RequestCompletion) {
-        let url = try! URLRequest(url: url, method: .post, headers: headers)
+    final class func request(url: URLConvertible, method: HTTPMethod, parameters: Parameters? = nil, headers: HTTPHeaders? = nil, completion: @escaping RequestCompletion) {
+        Alamofire.request(url, method: method, parameters: parameters, headers: headers).responseJSON { responseObject in
+            guard responseObject.result.isSuccess else {
+                completion(nil, responseObject.error)
+                return
+            }
+            guard let response = responseObject.result.value as? [String : Any] else {
+                completion(nil, InternalError.JSONParseError)
+                return
+            }
+            let errorMessage = APIManager.commonErrorMessage(response: response)
+            if errorMessage.isEmpty {
+                completion(response, nil)
+            } else {
+                completion(nil, InternalError.custom(errorMessage))
+            }
+            completion(response, nil)
+        }
+    }
+    
+    final class func upload(url: URLConvertible, method: HTTPMethod = .post, headers: HTTPHeaders = [:], parameters: Parameters, completion: @escaping RequestCompletion) {
+        guard let url = try? URLRequest(url: url, method: .post, headers: headers) else {
+            fatalError("URL unwrapping error")
+        }
         
         Alamofire.upload( multipartFormData: { multipartFormData in
             for (key, value) in parameters {
@@ -57,6 +79,13 @@ extension APIManager {
                         completion(nil, InternalError.JSONParseError)
                         return
                     }
+                    let errorMessage = APIManager.commonErrorMessage(response: response)
+                    if errorMessage.isEmpty {
+                        completion(response, nil)
+                    } else {
+                        completion(nil, InternalError.custom(errorMessage))
+                    }
+
                     completion(response, nil)
                 }
             case .failure( _):
@@ -64,5 +93,12 @@ extension APIManager {
             }
         }
         )
+    }
+}
+
+//MARK: - Response errors
+extension APIManager {
+    final class func commonErrorMessage(response: [String:Any]) -> String {
+        return response["error"] as? String ?? ""
     }
 }
