@@ -4,8 +4,10 @@
 target 'JUST GIF IT' do
   use_frameworks!
   pod 'Alamofire', '~> 4.7'
-  pod 'AlamofireObjectMapper'
+  pod 'ObjectMapper', '~> 3.4'
+  pod 'SwiftyJSON', '~> 4.0'
+  pod 'KeychainSwift', '~> 13.0'
   pod 'IQKeyboardManagerSwift'
-  pod 'AlamofireObjectMapper'
+  pod 'SwiftyGif'
 
 end

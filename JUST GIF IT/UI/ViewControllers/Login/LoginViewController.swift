@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, SegueCustomPerform {
 
     private enum TextFieldType: Int {
         case email = 0
@@ -19,6 +19,7 @@ class LoginViewController: UIViewController {
     @IBOutlet private weak var passwordTextField: UITextField!
     @IBOutlet private weak var loginButton: UIButton!
     @IBOutlet private weak var signUpButton: UIButton!
+    @IBOutlet private weak var activityView: UIActivityIndicatorView!
     
 }
 
@@ -28,6 +29,8 @@ extension LoginViewController {
         super.viewDidLoad()
         setupLogic()
         setupUI()
+        
+        setupDebugData()
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -38,7 +41,15 @@ extension LoginViewController {
 //MARK: - IBActions
 private extension LoginViewController {
     @IBAction func loginButtonPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: Segue.toMainStoryboard.rawValue, sender: nil)
+        activityView.start()
+        UserManager.login(email: emailTextField.text, password: passwordTextField.text) { [weak self] (error) in
+            self?.activityView.stop()
+            if let error = error {
+                self?.showAlert(error: error)
+            } else {
+                self?.performSegue(withIdentifier: .toMainStoryboard, sender: nil)
+            }
+        }
     }
 }
 
@@ -57,6 +68,12 @@ private extension LoginViewController {
         signUpButton.setAppStyle()
     }
     
+    func setupDebugData() {
+        if AppManager.isDebug {
+            emailTextField.text = "test3@gmail.com"
+            passwordTextField.text = "qqq"
+        }
+    }
 }
 
 //MARK: - UITextFieldDelegate

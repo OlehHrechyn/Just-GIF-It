@@ -10,6 +10,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Login-->
+        <scene sceneID="4Aw-eR-dbC">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Login" id="8dF-g8-Tee" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="B6v-fx-0mh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="374" y="-107"/>
+        </scene>
         <!--GALLERY-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -40,6 +48,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="GALLERY" id="YhU-s4-DQh">
+                        <barButtonItem key="leftBarButtonItem" image="LogOut" id="qp8-eI-egk">
+                            <connections>
+                                <action selector="logoutButtonPressed:" destination="BYZ-38-t0r" id="kK0-tq-6rz"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="eXq-cW-N2d">
                                 <connections>
@@ -53,6 +66,10 @@
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
+                    <connections>
+                        <outlet property="collectionView" destination="gna-VM-G7t" id="ZJH-sE-6dj"/>
+                        <segue destination="8dF-g8-Tee" kind="custom" identifier="toLoginStoryboard" customClass="ReplaceRootSegue" customModule="JUST_GIF_IT" customModuleProvider="target" id="rjz-i1-2bu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -66,19 +83,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PicturePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="YTU-jX-y8J">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PicturePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="YTU-jX-y8J">
                                 <rect key="frame" x="28" y="237.5" width="319" height="212.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="YTU-jX-y8J" secondAttribute="height" multiplier="3:2" id="2Gj-KK-XPq"/>
                                 </constraints>
                             </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Xon-Yd-QaE">
+                                <rect key="frame" x="169" y="325" width="37" height="37"/>
+                                <color key="color" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="YTU-jX-y8J" firstAttribute="centerX" secondItem="5cW-jY-cXB" secondAttribute="centerX" id="0KX-Pw-1MX"/>
                             <constraint firstItem="YTU-jX-y8J" firstAttribute="width" secondItem="DPF-dt-X8F" secondAttribute="width" multiplier="0.85" id="NPs-dR-DwY"/>
+                            <constraint firstItem="Xon-Yd-QaE" firstAttribute="centerX" secondItem="YTU-jX-y8J" secondAttribute="centerX" id="ote-f1-F52"/>
                             <constraint firstItem="YTU-jX-y8J" firstAttribute="centerY" secondItem="5cW-jY-cXB" secondAttribute="centerY" id="qjq-4s-ivZ"/>
+                            <constraint firstItem="Xon-Yd-QaE" firstAttribute="centerY" secondItem="YTU-jX-y8J" secondAttribute="centerY" id="zMw-WU-kYs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5cW-jY-cXB"/>
                         <connections>
@@ -87,6 +110,7 @@
                     </view>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
+                        <outlet property="gifActivityView" destination="Xon-Yd-QaE" id="OmI-dg-cZP"/>
                         <outlet property="gifImageView" destination="YTU-jX-y8J" id="DaT-YI-5Gz"/>
                     </connections>
                 </viewController>
@@ -97,7 +121,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1072.8" y="174.96251874062969"/>
+            <point key="canvasLocation" x="1073" y="180"/>
         </scene>
         <!--NEW IMAGE-->
         <scene sceneID="juX-FI-bsa">
@@ -139,6 +163,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="LogOut" width="24" height="22"/>
         <image name="PicturePlaceholder" width="150" height="100"/>
     </resources>
 </document>

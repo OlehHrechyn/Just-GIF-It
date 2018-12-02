@@ -15,6 +15,16 @@ enum StoryboardType: String {
 }
 
 class AppManager {
+    static let isDebug: Bool = {
+        var isDebug = false
+        func set(debug: Bool) -> Bool {
+            isDebug = debug
+            return isDebug
+        }
+        assert(set(debug: true))
+        return isDebug
+    }()
+    
     final class func setupInitials() {
         setupKeyboard()
         setupAppearance()
@@ -32,7 +42,7 @@ class AppManager {
 private extension AppManager {
     class func necessaryViewController() -> UIViewController? {
         var storyboard: UIStoryboard
-        if let token = UserManager.token(), token.isEmpty == false {
+        if let token = KeychainManager.getToken(), !token.isEmpty {
             storyboard = UIStoryboard(name: StoryboardType.main.rawValue, bundle: nil)
         } else {
             storyboard = UIStoryboard(name: StoryboardType.login.rawValue, bundle: nil)
@@ -47,5 +57,7 @@ private extension AppManager {
     
     class func setupAppearance() {
         UINavigationBar.appearance().tintColor = .orange
+        UINavigationBar.appearance().prefersLargeTitles = true
+        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange]
     }
 }

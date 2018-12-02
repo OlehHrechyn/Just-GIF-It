@@ -24,7 +24,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uzb-rn-IGT">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="462.5"/>
                                         <subviews>
-                                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="mW0-xL-OFJ" customClass="AvatarImageView" customModule="JUST_GIF_IT" customModuleProvider="target">
+                                            <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="mW0-xL-OFJ" customClass="AvatarImageView" customModule="JUST_GIF_IT" customModuleProvider="target">
                                                 <rect key="frame" x="94" y="25" width="187.5" height="187.5"/>
                                                 <gestureRecognizers/>
                                                 <constraints>
@@ -125,21 +125,28 @@
                                     <action selector="signInButtonPressed:" destination="h2l-Hv-vuS" eventType="touchUpInside" id="MAL-fe-jy9"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="rtd-em-sLk">
+                                <rect key="frame" x="169" y="325" width="37" height="37"/>
+                                <color key="color" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="76k-Oy-7LZ" firstAttribute="bottom" secondItem="WCr-q6-Ept" secondAttribute="bottom" constant="25" id="AvP-b8-a27"/>
                             <constraint firstItem="76k-Oy-7LZ" firstAttribute="trailing" secondItem="zLx-gh-KDr" secondAttribute="trailing" id="Cpo-Nh-474"/>
+                            <constraint firstItem="rtd-em-sLk" firstAttribute="centerX" secondItem="76k-Oy-7LZ" secondAttribute="centerX" id="JF5-WM-OqD"/>
                             <constraint firstItem="zLx-gh-KDr" firstAttribute="top" secondItem="76k-Oy-7LZ" secondAttribute="top" id="JHu-SO-vQ0"/>
                             <constraint firstItem="WCr-q6-Ept" firstAttribute="centerX" secondItem="76k-Oy-7LZ" secondAttribute="centerX" id="Mt4-RV-pRh"/>
                             <constraint firstItem="zLx-gh-KDr" firstAttribute="leading" secondItem="76k-Oy-7LZ" secondAttribute="leading" id="Sgm-B9-al4"/>
                             <constraint firstItem="WCr-q6-Ept" firstAttribute="width" secondItem="kgU-sd-eH5" secondAttribute="width" multiplier="0.5" id="a5I-3U-YWd"/>
                             <constraint firstItem="WCr-q6-Ept" firstAttribute="top" secondItem="zLx-gh-KDr" secondAttribute="bottom" id="aBv-J7-kdV"/>
+                            <constraint firstItem="rtd-em-sLk" firstAttribute="centerY" secondItem="76k-Oy-7LZ" secondAttribute="centerY" id="sFt-fh-CZh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="76k-Oy-7LZ"/>
                     </view>
                     <navigationItem key="navigationItem" title="SIGN UP" id="FQy-rU-IOM"/>
                     <connections>
+                        <outlet property="activityView" destination="rtd-em-sLk" id="F9y-k5-ghf"/>
                         <outlet property="avatarImageView" destination="mW0-xL-OFJ" id="1OB-3P-0XY"/>
                         <outlet property="emailTextField" destination="pp6-NC-KS9" id="wT7-z8-DqN"/>
                         <outlet property="passwordTextField" destination="a64-c1-dw3" id="aca-kV-a9E"/>
@@ -257,14 +264,20 @@
                                     <segue destination="h2l-Hv-vuS" kind="presentation" modalTransitionStyle="flipHorizontal" id="dUg-jQ-8hA"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="HUM-N4-tNI">
+                                <rect key="frame" x="169" y="325" width="37" height="37"/>
+                                <color key="color" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="58z-jf-RIU" firstAttribute="centerX" secondItem="ge8-XD-ft3" secondAttribute="centerX" id="6fe-dh-FQV"/>
+                            <constraint firstItem="HUM-N4-tNI" firstAttribute="centerY" secondItem="ge8-XD-ft3" secondAttribute="centerY" id="CuY-ll-npu"/>
                             <constraint firstItem="j7j-rR-Ids" firstAttribute="leading" secondItem="ge8-XD-ft3" secondAttribute="leading" id="O0Z-kq-I1i"/>
                             <constraint firstItem="58z-jf-RIU" firstAttribute="top" secondItem="j7j-rR-Ids" secondAttribute="bottom" id="ObY-D9-9TO"/>
                             <constraint firstItem="ge8-XD-ft3" firstAttribute="trailing" secondItem="j7j-rR-Ids" secondAttribute="trailing" id="QK6-7c-nq0"/>
                             <constraint firstItem="58z-jf-RIU" firstAttribute="width" secondItem="Idk-kj-8lu" secondAttribute="width" multiplier="0.5" id="X0r-92-cYz"/>
+                            <constraint firstItem="HUM-N4-tNI" firstAttribute="centerX" secondItem="ge8-XD-ft3" secondAttribute="centerX" id="atO-9L-r1W"/>
                             <constraint firstItem="j7j-rR-Ids" firstAttribute="top" secondItem="ge8-XD-ft3" secondAttribute="top" id="dhQ-um-hCh"/>
                             <constraint firstItem="ge8-XD-ft3" firstAttribute="bottom" secondItem="58z-jf-RIU" secondAttribute="bottom" constant="25" id="wgq-0y-T7z"/>
                         </constraints>
@@ -272,6 +285,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="SIGN IN" id="8oO-kW-JgK"/>
                     <connections>
+                        <outlet property="activityView" destination="HUM-N4-tNI" id="RhV-4b-hjo"/>
                         <outlet property="emailTextField" destination="BjW-3I-Uq5" id="h51-C9-xBn"/>
                         <outlet property="loginButton" destination="vDy-na-sfl" id="WHw-NC-O5d"/>
                         <outlet property="passwordTextField" destination="lr0-yh-fcH" id="uHa-3X-WRT"/>

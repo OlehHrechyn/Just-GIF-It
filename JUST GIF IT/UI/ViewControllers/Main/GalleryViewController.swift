@@ -8,9 +8,10 @@
 
 import UIKit
 
-class GalleryViewController: UIViewController {
+class GalleryViewController: UIViewController, SegueCustomPerform {
 
-
+    @IBOutlet private weak var collectionView: UICollectionView!
+    
 }
 
 //MARK: - Lifecycle
@@ -22,6 +23,14 @@ extension GalleryViewController {
     }
 }
 
+//MARK: - IBActions
+private extension GalleryViewController {
+    @IBAction func logoutButtonPressed(_ sender: UIBarButtonItem) {
+        UserManager.logout()
+        performSegue(withIdentifier: .toLoginStoryboard, sender: nil)
+    }
+}
+
 //MARK: - Private
 private extension GalleryViewController {
     func setupLogic() {
@@ -29,7 +38,7 @@ private extension GalleryViewController {
     }
     
     func setupUI() {
-        navigationController?.navigationBar.setGradientBackground(colors: [.darkGray, .black])
+        navigationController?.navigationBar.setAppGradientBackground()
     }
     
 }

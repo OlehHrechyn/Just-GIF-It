@@ -9,10 +9,16 @@
 import UIKit
 
 extension UINavigationBar {
+    func setAppGradientBackground() {
+        setGradientBackground(colors: [.darkGray, .black])
+    }
+    
     func setGradientBackground(colors: [UIColor]) {
-        var updatedFrame = bounds
-        updatedFrame.size.height += self.frame.origin.y
-        let gradientLayer = CAGradientLayer(frame: updatedFrame, colors: colors)
-        setBackgroundImage(gradientLayer.createGradientImage(), for: UIBarMetrics.default)
+        DispatchQueue.main.async { [weak self] in
+            var updatedFrame = self?.bounds
+            updatedFrame?.size.height += self?.frame.origin.y ?? 0
+            let gradientLayer = CAGradientLayer(frame: updatedFrame ?? CGRect.zero, colors: colors)
+            self?.setBackgroundImage(gradientLayer.createGradientImage(), for: UIBarMetrics.default)
+        }
     }
 }
