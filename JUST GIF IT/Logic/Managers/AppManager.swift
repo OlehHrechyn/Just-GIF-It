@@ -15,15 +15,6 @@ enum StoryboardType: String {
 }
 
 class AppManager {
-    static let isDebug: Bool = {
-        var isDebug = false
-        func set(debug: Bool) -> Bool {
-            isDebug = debug
-            return isDebug
-        }
-        assert(set(debug: true))
-        return isDebug
-    }()
     
     final class func setupInitials() {
         setupKeyboard()
@@ -58,6 +49,6 @@ private extension AppManager {
     class func setupAppearance() {
         UINavigationBar.appearance().tintColor = .orange
         UINavigationBar.appearance().prefersLargeTitles = true
-        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.orange]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor.orange]
     }
 }

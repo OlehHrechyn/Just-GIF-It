@@ -8,6 +8,7 @@ target 'JUST GIF IT' do
   pod 'SwiftyJSON', '~> 4.0'
   pod 'KeychainSwift', '~> 13.0'
   pod 'IQKeyboardManagerSwift'
+  pod 'EmptyDataSet-Swift', '~> 4.2.0'
   pod 'SwiftyGif'
   pod 'Kingfisher', '~> 4.0'
 end

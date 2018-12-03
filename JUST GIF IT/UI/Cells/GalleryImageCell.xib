@@ -19,20 +19,20 @@
                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PicturePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="enn-kT-JmP">
-                        <rect key="frame" x="0.0" y="0.0" width="128" height="94"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="PicturePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="enn-kT-JmP">
+                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SP5-6B-lXm" userLabel="Bottom View">
-                        <rect key="frame" x="0.0" y="94" width="128" height="34"/>
+                        <rect key="frame" x="0.0" y="91.5" width="128" height="36.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="eDj-PG-HZY">
-                                <rect key="frame" x="5" y="2" width="118" height="14"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="eDj-PG-HZY">
+                                <rect key="frame" x="5" y="2" width="118" height="15"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address," lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="fdn-Gv-SsZ">
-                                <rect key="frame" x="5" y="18" width="118" height="14"/>
+                                <rect key="frame" x="5" y="19" width="118" height="15.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -55,13 +55,13 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="enn-kT-JmP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="3DA-a4-bSh"/>
-                <constraint firstItem="enn-kT-JmP" firstAttribute="height" secondItem="SP5-6B-lXm" secondAttribute="height" multiplier="2.75" id="6Ht-Qc-nN9"/>
+                <constraint firstItem="enn-kT-JmP" firstAttribute="height" secondItem="SP5-6B-lXm" secondAttribute="height" multiplier="3.5" id="6Ht-Qc-nN9"/>
                 <constraint firstItem="enn-kT-JmP" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="7cO-mB-gJf"/>
                 <constraint firstAttribute="bottom" secondItem="SP5-6B-lXm" secondAttribute="bottom" id="BGT-4c-cbY"/>
                 <constraint firstAttribute="trailing" secondItem="SP5-6B-lXm" secondAttribute="trailing" id="GXo-de-xBH"/>
-                <constraint firstItem="SP5-6B-lXm" firstAttribute="top" secondItem="enn-kT-JmP" secondAttribute="bottom" id="X3d-9q-lZn"/>
                 <constraint firstAttribute="trailing" secondItem="enn-kT-JmP" secondAttribute="trailing" id="aTk-YF-AeC"/>
                 <constraint firstItem="SP5-6B-lXm" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="vp2-KD-lik"/>
+                <constraint firstAttribute="bottom" secondItem="enn-kT-JmP" secondAttribute="bottom" id="w8c-Y7-g3A"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="88" height="64"/>

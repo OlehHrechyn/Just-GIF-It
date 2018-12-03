@@ -14,21 +14,14 @@ enum SegueIdentifier: String {
     case toGifViewController = "toGifViewController"
 }
 
-protocol SegueCustomPerform {
-    
+protocol SegueCustomPerform  where Self: UIViewController {
+    func performSegue(withIdentifier: SegueIdentifier, sender: Any?)
 }
 
-extension SegueCustomPerform where Self: UIViewController {
+extension SegueCustomPerform {
     func performSegue(withIdentifier: SegueIdentifier, sender: Any?) {
         DispatchQueue.main.async { [weak self] in
             self?.performSegue(withIdentifier: withIdentifier.rawValue, sender: sender)
         }
-    }
-    
-    func segueIdentifierForSegue(segue: UIStoryboardSegue) -> SegueIdentifier {
-        guard let identifier = segue.identifier, let segueIdentifier = SegueIdentifier(rawValue: identifier) else {
-            fatalError("Invalid segue identifier \(String(describing: segue.identifier)).")
-        }
-        return segueIdentifier
     }
 }

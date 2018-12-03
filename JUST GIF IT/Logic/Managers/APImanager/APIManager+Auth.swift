@@ -13,13 +13,19 @@ import SwiftyJSON
 
 //MARK: - Auth Functionality
 extension APIManager {
+    static let usernameKey = "username"
+    static let emailKey = "email"
+    static let passwordKey = "password"
+    static let avatarKey = "avatar"
+    
+    static let colonSpaceKey = ": "
     typealias UserModelCompletion = (_ user: User?, _ error: Error?) -> Void
     
     final class func login(email: String, password: String, completion: @escaping UserModelCompletion) {
         let url = baseUrl + EndPoint.auth.login.rawValue
         var parameters = Parameters()
-        parameters["email"] = email
-        parameters["password"] = password
+        parameters[emailKey] = email
+        parameters[passwordKey] = password
         
         APIManager.request(url: url, method: .post, parameters: parameters) { (response, error) in
             guard let response = response else {
@@ -33,10 +39,10 @@ extension APIManager {
     final class func register(username: String, email: String, password: String, avatar: UIImage, completion: @escaping UserModelCompletion) {
         let url = baseUrl + EndPoint.auth.register.rawValue
         var parameters = Parameters()
-        parameters["username"] = username
-        parameters["email"] = email
-        parameters["password"] = password
-        parameters["avatar"] = avatar
+        parameters[usernameKey] = username
+        parameters[emailKey] = email
+        parameters[passwordKey] = password
+        parameters[avatarKey] = avatar
         
         APIManager.upload(url: url, parameters: parameters) { (response, error) in
             guard let response = response else {
@@ -56,19 +62,19 @@ extension APIManager {
 }
 
 //MARK: - Response errors
-extension APIManager {
+private extension APIManager {
     final class func registrationErrorMessage(response: [String: Any]) -> String {
         var errorMessages = [String]()
         let json = JSON(arrayLiteral: response)
         
-        if let avatarError = json.array?.first?["children"]["avatar"]["errors"].array?.first?.string {
-            errorMessages.append("Avatar: " + avatarError)
+        if let avatarError = json.array?.first?[childrenKey][avatarKey][errorsKey].array?.first?.string {
+            errorMessages.append(avatarKey.capitalized + colonSpaceKey + avatarError)
         }
-        if let emailError = json.array?.first?["children"]["email"]["errors"].array?.first?.string {
-            errorMessages.append("Email: " + emailError)
+        if let emailError = json.array?.first?[childrenKey][emailKey][errorsKey].array?.first?.string {
+            errorMessages.append(emailKey.capitalized + colonSpaceKey + emailError)
         }
-        if let passwordError = json.array?.first?["children"]["password"]["errors"].array?.first?.string {
-            errorMessages.append("Password: " + passwordError)
+        if let passwordError = json.array?.first?[childrenKey][passwordKey][errorsKey].array?.first?.string {
+            errorMessages.append(passwordKey.capitalized + colonSpaceKey + passwordError)
         }
         
         return errorMessages.joined(separator: " ")

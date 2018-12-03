@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import EmptyDataSet_Swift
 
 class GalleryViewController: UIViewController, SegueCustomPerform {
-
-    @IBOutlet private weak var collectionView: UICollectionView!
     
-    private let imagesManager = ImageManager()
+    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet weak var playGifButton: UIBarButtonItem!
+    
 }
 
 //MARK: - Lifecycle
@@ -35,29 +36,37 @@ private extension GalleryViewController {
 //MARK: - Private
 private extension GalleryViewController {
     func setupLogic() {
-        imagesManager.delegate = self
-        imagesManager.downloadImages()
+        ImageManager.shared.delegate = self
+        ImageManager.shared.downloadImages()
         collectionView.register(GalleryImageCell.classNib(), forCellWithReuseIdentifier: GalleryImageCell.className())
+        collectionView.emptyDataSetSource = self
+        collectionView.emptyDataSetDelegate = self
         hideKeyboardOnTap()
     }
     
     func setupUI() {
-        navigationController?.navigationBar.setAppGradientBackground()
+        setupPlayGifButton()
+        navigationController?.navigationBar.setAppStyle()
     }
     
+    func setupPlayGifButton() {
+        DispatchQueue.main.async { [weak self] in
+            self?.playGifButton.isEnabled = ImageManager.shared.images.count > 0
+        }
+    }
 }
 
 //MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imagesManager.images.count
+        return ImageManager.shared.images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GalleryImageCell.className(), for: indexPath) as? GalleryImageCell else {
             fatalError("GalleryImageCell unwrapping error")
         }
-        cell.configure(with: imagesManager.images[indexPath.item])
+        cell.configure(with: ImageManager.shared.images[indexPath.item])
         return cell
     }
     
@@ -77,17 +86,38 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
 
 //MARK: - ImageManagerDelegate
 extension GalleryViewController: ImageManagerDelegate {
-    func imageManager(_ imageManager: ImageManager?, didUpdateImages images: [GetRequestImage]) {
+    func imageManager(_ imageManager: ImageManager?, didUpdateImages images: [LocalImageModel]) {
         DispatchQueue.main.async { [weak self] in
             self?.collectionView.reloadData()
+            self?.setupPlayGifButton()
         }
     }
     
-    func imageManager(_ imageManager: ImageManager?, failedUpdating error: Error?) {
+    func imageManager(_ imageManager: ImageManager?, didFailFetching error: Error?) {
         if let error = error {
             showAlert(error: error)
         }
     }
     
+    func imageManager(_ imageManager: ImageManager?, model: LocalImageModel, didReceiveAddress address: String) {
+        if let index = ImageManager.shared.images.firstIndex(where: {$0 == model}) {
+            collectionView.reloadItems(at: [IndexPath(item: index, section: 0)])
+        }
+    }
     
+}
+
+//MARK: - EmptyDataSetSource, EmptyDataSetDelegate
+extension GalleryViewController: EmptyDataSetSource, EmptyDataSetDelegate {
+    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
+        return UIImage.picturePlaceholder()
+    }
+    
+    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        return NSAttributedString(string: "Ooops...")
+    }
+    
+    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
+        return NSAttributedString(string: "You have not uploaded any images and can not view the GIF.")
+    }
 }

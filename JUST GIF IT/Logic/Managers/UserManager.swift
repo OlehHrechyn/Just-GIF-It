@@ -13,22 +13,22 @@ class UserManager {
     
     final class func login(email: String?, password: String?, completion: @escaping ErrorCompletion) {
         guard let email = email, !email.isEmpty else {
-            completion(InternalError.blank("Email"))
+            completion(InternalError.blank(APIManager.emailKey.capitalized))
             return
         }
         
         guard email.isValidEmail() else {
-            completion(InternalError.invalid("Email"))
+            completion(InternalError.invalid(APIManager.emailKey.capitalized))
             return
         }
         
         guard let password = password, !password.isEmpty else {
-            completion(InternalError.blank("Password"))
+            completion(InternalError.blank(APIManager.passwordKey.capitalized))
             return
         }
         
         guard password.isValidPassword() else {
-            completion(InternalError.invalid("Password"))
+            completion(InternalError.invalid(APIManager.passwordKey.capitalized))
             return
         }
         
@@ -43,27 +43,27 @@ class UserManager {
     
     final class func register(username:String?, email: String?, password: String?, avatar: UIImage?, completion: @escaping ErrorCompletion) {
         guard let email = email, !email.isEmpty else {
-            completion(InternalError.blank("Email"))
+            completion(InternalError.blank(APIManager.emailKey.capitalized))
             return
         }
         
         guard email.isValidEmail() else {
-            completion(InternalError.invalid("Email"))
+            completion(InternalError.invalid(APIManager.emailKey.capitalized))
             return
         }
         
         guard let password = password, !password.isEmpty else {
-            completion(InternalError.blank("Password"))
+            completion(InternalError.blank(APIManager.passwordKey.capitalized))
             return
         }
         
         guard password.isValidPassword() else {
-            completion(InternalError.invalid("Password"))
+            completion(InternalError.invalid(APIManager.passwordKey.capitalized))
             return
         }
         
         guard let avatar = avatar, !avatar.isPlaceholder() else {
-            completion(InternalError.blank("Avatar"))
+            completion(InternalError.blank(APIManager.avatarKey.capitalized))
             return
         }
         
@@ -75,8 +75,9 @@ class UserManager {
         }
         
     }
-
+    
     final class func logout() {
         KeychainManager.deleteToken()
+        ImageManager.shared.clear()
     }
 }

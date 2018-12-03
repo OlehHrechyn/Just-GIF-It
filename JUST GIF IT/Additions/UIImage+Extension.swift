@@ -32,7 +32,7 @@ extension UIImage {
     }
     
     func resizeImage(maxSide: CGFloat = 1024.0) -> UIImage? {
-    
+        
         let actualHeight = size.height
         let actualWidth = size.width
         

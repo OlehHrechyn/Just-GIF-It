@@ -8,7 +8,8 @@
 
 import UIKit
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, SegueCustomPerform, ImagePickerConforming {
+    var imagePicker: UIImagePickerController = UIImagePickerController()
     
     private enum TextFieldType: Int {
         case username = 0
@@ -24,7 +25,6 @@ class RegisterViewController: UIViewController {
     @IBOutlet private weak var signInButton: UIButton!
     @IBOutlet private weak var activityView: UIActivityIndicatorView!
     
-    private let imagePicker = UIImagePickerController()
 }
 
 //MARK: - Lifecycle
@@ -33,7 +33,6 @@ extension RegisterViewController {
         super.viewDidLoad()
         setupLogic()
         setupUI()
-        setupDebugData()
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -44,15 +43,13 @@ extension RegisterViewController {
 //MARK: - IBActions
 private extension RegisterViewController {
     @IBAction func registerButtonPressed(_ sender: UIButton) {
-        activityView.startAnimating()
+        activityView.start()
         UserManager.register(username: usernameTextField.text, email: emailTextField.text, password: passwordTextField.text, avatar: avatarImageView.image) { [weak self] (error) in
             self?.activityView.stop()
             if let error = error {
                 self?.showAlert(error: error)
             } else {
-                //FIXME: - does not see the extension method "performSegue"
-//                self?.performSegue(withIdentifier: .toMainStoryboard, sender: nil)
-                self?.performSegue(withIdentifier: SegueIdentifier.toMainStoryboard.rawValue, sender: nil)
+                self?.performSegue(withIdentifier: .toMainStoryboard, sender: nil)
             }
         }
     }
@@ -84,52 +81,12 @@ private extension RegisterViewController {
         signInButton.setAppStyle()
     }
     
-    func setupDebugData() {
-        if AppManager.isDebug {
-            usernameTextField.text = "qwerty"
-            emailTextField.text = "test2@gmail.com"
-            passwordTextField.text = "qqq"
-        }
-    }
-    
     func setupImagePicker() {
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
-        imagePicker.navigationBar.setGradientBackground(colors: [.gray, .lightGray])
+        imagePicker.navigationBar.setAppStyle()
     }
     
-    func showImagePickerAlert() {
-        
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            let cameraAction = UIAlertAction(title: "Camera", style: .default) { [weak self] _ in
-                self?.imagePicker.sourceType = .camera
-                self?.presentImagePicker()
-            }
-            alertController.addAction(cameraAction)
-        }
-        
-        let galleryAction = UIAlertAction(title: "Gallery", style: .default) { [weak self] _ in
-            self?.imagePicker.sourceType = .photoLibrary
-            self?.presentImagePicker()
-        }
-        alertController.addAction(galleryAction)
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        alertController.addAction(cancelAction)
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.present(alertController, animated: true, completion: nil)
-        }
-    }
-    
-    func presentImagePicker() {
-        DispatchQueue.main.async { [weak self] in
-            if let imagePicker = self?.imagePicker {
-                self?.present(imagePicker, animated: true, completion: nil)
-            }
-        }
-    }
 }
 
 //MARK: - UITextFieldDelegate

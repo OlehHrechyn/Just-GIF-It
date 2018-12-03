@@ -9,7 +9,7 @@
 import UIKit
 
 class LoginViewController: UIViewController, SegueCustomPerform {
-
+    
     private enum TextFieldType: Int {
         case email = 0
         case password
@@ -29,8 +29,6 @@ extension LoginViewController {
         super.viewDidLoad()
         setupLogic()
         setupUI()
-        
-        setupDebugData()
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -66,13 +64,6 @@ private extension LoginViewController {
         passwordTextField.setAppStyle()
         loginButton.setAppStyle()
         signUpButton.setAppStyle()
-    }
-    
-    func setupDebugData() {
-        if AppManager.isDebug {
-            emailTextField.text = "test3@gmail.com"
-            passwordTextField.text = "qqq"
-        }
     }
 }
 

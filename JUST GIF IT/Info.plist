@@ -57,5 +57,7 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Used for getting user profile photo</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Give me your location for photo uploading</string>
 </dict>
 </plist>

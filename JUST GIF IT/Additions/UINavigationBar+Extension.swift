@@ -9,7 +9,7 @@
 import UIKit
 
 extension UINavigationBar {
-    func setAppGradientBackground() {
+    func setAppStyle() {
         setGradientBackground(colors: [.darkGray, .black])
     }
     

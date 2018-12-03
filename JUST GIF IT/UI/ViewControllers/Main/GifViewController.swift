@@ -58,14 +58,8 @@ private extension GifViewController {
             
         }
     }
-    
-    func setupUI() {
-        DispatchQueue.main.async { [weak self] in
-            self?.gifImageView.layer.setBorder(color: .orange, width: 2.0)
-        }
-    }
-    
 }
+
 extension GifViewController : SwiftyGifDelegate {
     
     func gifURLDidFinish(sender: UIImageView) {

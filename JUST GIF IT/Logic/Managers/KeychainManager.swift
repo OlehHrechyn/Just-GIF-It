@@ -11,7 +11,7 @@ import KeychainSwift
 
 class KeychainManager {
     private static let tokenKey = "token"
-
+    
     final class func getToken() -> String? {
         return KeychainSwift().get(tokenKey)
     }

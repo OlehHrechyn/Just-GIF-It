@@ -10,7 +10,7 @@ import UIKit
 import Kingfisher
 
 class GalleryImageCell: UICollectionViewCell {
-
+    
     @IBOutlet private weak var imageView: UIImageView!
     @IBOutlet private weak var weatherLabel: UILabel!
     @IBOutlet private weak var addressLabel: UILabel!
@@ -21,7 +21,10 @@ class GalleryImageCell: UICollectionViewCell {
 extension GalleryImageCell {
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        if UIDevice.current.screenType == .iPhones_5_5s_5c_SE {
+            weatherLabel.font = UIFont(name: weatherLabel.font.fontName, size: 14.0)
+            addressLabel.font = UIFont(name: addressLabel.font.fontName, size: 14.0)
+        }
     }
 }
 
@@ -36,15 +39,15 @@ extension GalleryImageCell {
         return UINib.init(nibName: GalleryImageCell.className(), bundle: nil)
     }
     
-    func configure(with image: GetRequestImage) {
+    func configure(with image: LocalImageModel) {
         DispatchQueue.main.async { [weak self] in
             if let stringUrl = image.smallImagePath, let url = URL(string: stringUrl) {
                 let resource = ImageResource(downloadURL: url, cacheKey: image.smallImagePath)
                 self?.imageView.kf.indicatorType = .activity
                 self?.imageView.kf.setImage(with: resource, placeholder: UIImage.picturePlaceholder())
             }
-            self?.weatherLabel.text = image.parameters?.weather
-            self?.addressLabel.text = LocationManager.getPlaceName(latitude: image.parameters?.latitude, longitude: image.parameters?.longitude)
+            self?.weatherLabel.text = image.weather
+            self?.addressLabel.text = image.address
         }
     }
     

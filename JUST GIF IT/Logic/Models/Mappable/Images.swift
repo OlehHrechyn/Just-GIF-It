@@ -1,5 +1,5 @@
 //
-//  ServerImage.swift
+//  Images.swift
 //  JUST GIF IT
 //
 //  Created by Developer on 12/2/18.
@@ -9,6 +9,22 @@
 import Foundation
 import ObjectMapper
 
+//MARK: - Local image
+struct LocalImageModel: Equatable {
+    var latitude: Double?
+    var longitude: Double?
+    var image: UIImage?
+    var description: String?
+    var hashtag: String?
+    var weather: String?
+    var smallImagePath: String?
+    var bigImagePath: String?
+    
+    var address: String?
+}
+
+
+//MARK: - Server Images
 struct GetRequestImage: Mappable {
     var id: Int?
     var description: String?
@@ -35,8 +51,8 @@ struct GetRequestImage: Mappable {
 
 
 struct GetRequestImageParameters: Mappable {
-    var latitude: Float?
-    var longitude: Float?
+    var latitude: Double?
+    var longitude: Double?
     var weather: String?
     
     init?(map: Map) {

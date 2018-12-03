@@ -14,7 +14,11 @@ typealias RequestCompletion = (_ response: [String: Any]?, _ error: Error?) -> V
 
 class APIManager {
     static let baseUrl = "http://api.doitserver.in.ua"
+    
     static let tokenKey = "token"
+    static let childrenKey = "children"
+    static let errorsKey = "errors"
+    static let errorKey = "error"
     
     enum EndPoint {
         enum auth: String {
@@ -24,7 +28,7 @@ class APIManager {
         enum image: String {
             case all = "/all"
             case gif = "/gif"
-            case immage = "/image"
+            case upload = "/image"
         }
     }
     
@@ -49,7 +53,6 @@ extension APIManager {
             } else {
                 completion(nil, InternalError.custom(errorMessage))
             }
-            completion(response, nil)
         }
     }
     
@@ -63,6 +66,8 @@ extension APIManager {
                 if let image = value as? UIImage, let data = image.jpegData(compressionQuality: 1.0) {
                     multipartFormData.append(data, withName: key, fileName: "file.jpg", mimeType: "image/jpeg")
                 } else if let string = value as? String, let data = string.data(using: .utf8) {
+                    multipartFormData.append(data, withName: key)
+                } else if let data = value as? Data {
                     multipartFormData.append(data, withName: key)
                 }
             }
@@ -85,8 +90,6 @@ extension APIManager {
                     } else {
                         completion(nil, InternalError.custom(errorMessage))
                     }
-
-                    completion(response, nil)
                 }
             case .failure( _):
                 break
@@ -99,6 +102,6 @@ extension APIManager {
 //MARK: - Response errors
 extension APIManager {
     final class func commonErrorMessage(response: [String:Any]) -> String {
-        return response["error"] as? String ?? ""
+        return response[errorKey] as? String ?? ""
     }
 }
