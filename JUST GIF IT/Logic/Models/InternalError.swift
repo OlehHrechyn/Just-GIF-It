@@ -13,6 +13,7 @@ enum InternalError: LocalizedError {
     case invalid(_ string: String)
     case somethingWrong
     case JSONParseError
+    case gpsError
     
     case custom(_ description: String?)
 }
@@ -28,6 +29,9 @@ extension InternalError {
             return "Something went wrong"
         case .JSONParseError:
             return "JSON parse error"
+        case .gpsError:
+            return "Please enable the location detecting"
+            
         case .custom(let description):
             if let description = description {
                 return description

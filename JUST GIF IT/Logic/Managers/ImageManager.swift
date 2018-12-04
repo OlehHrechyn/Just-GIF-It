@@ -45,11 +45,17 @@ extension ImageManager {
         }
         
         guard LocationManager.locationServicesEnabledOrNotDetermined() else {
-            completion(InternalError.custom("Please enable the location detecting"))
+            completion(InternalError.gpsError)
             return
         }
         
-        LocationManager.shared.getCurrentLocation { (location) in
+        LocationManager.shared.getCurrentLocation { (location, error) in
+            
+            guard let location = location else {
+                completion(InternalError.gpsError)
+                return
+            }
+            
             let latitude = location.coordinate.latitude
             let longitude = location.coordinate.longitude
             

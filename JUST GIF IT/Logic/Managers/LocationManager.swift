@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 
 class LocationManager: NSObject {
-    typealias LocationCompletion = (_ location: CLLocation) -> Void
+    typealias LocationCompletion = (_ location: CLLocation?, _ error: Error?) -> Void
     
     static let shared = LocationManager()
     
@@ -91,8 +91,15 @@ extension LocationManager: CLLocationManagerDelegate {
         locationManager.stopUpdatingLocation()
         locationManager.delegate = nil
         if let locationCompletion = locationCompletion {
-            locationCompletion(location)
-        }  
+            locationCompletion(location, nil)
+        }
     }
     
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        locationManager.stopUpdatingLocation()
+        locationManager.delegate = nil
+        if let locationCompletion = locationCompletion {
+            locationCompletion(nil, error)
+        }
+    }
 }
