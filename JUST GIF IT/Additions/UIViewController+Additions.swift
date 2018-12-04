@@ -30,7 +30,6 @@ extension UIViewController {
 
 protocol ImagePickerConforming  {
     var imagePicker: UIImagePickerController { get set }
-    
 }
 
 extension ImagePickerConforming where Self: UIViewController {

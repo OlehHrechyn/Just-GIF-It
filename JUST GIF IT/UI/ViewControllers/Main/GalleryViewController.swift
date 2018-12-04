@@ -13,6 +13,7 @@ class GalleryViewController: UIViewController, SegueCustomPerform {
     
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet weak var playGifButton: UIBarButtonItem!
+    @IBOutlet weak var activityView: UIActivityIndicatorView!
     
 }
 
@@ -38,6 +39,8 @@ private extension GalleryViewController {
     func setupLogic() {
         ImageManager.shared.delegate = self
         ImageManager.shared.downloadImages()
+        activityView.start()
+        
         collectionView.register(GalleryImageCell.classNib(), forCellWithReuseIdentifier: GalleryImageCell.className())
         collectionView.emptyDataSetSource = self
         collectionView.emptyDataSetDelegate = self
@@ -88,6 +91,7 @@ extension GalleryViewController: UICollectionViewDelegate, UICollectionViewDataS
 extension GalleryViewController: ImageManagerDelegate {
     func imageManager(_ imageManager: ImageManager?, didUpdateImages images: [LocalImageModel]) {
         DispatchQueue.main.async { [weak self] in
+            self?.activityView.stop()
             self?.collectionView.reloadData()
             self?.setupPlayGifButton()
         }
@@ -95,6 +99,7 @@ extension GalleryViewController: ImageManagerDelegate {
     
     func imageManager(_ imageManager: ImageManager?, didFailFetching error: Error?) {
         if let error = error {
+            activityView.stop()
             showAlert(error: error)
         }
     }

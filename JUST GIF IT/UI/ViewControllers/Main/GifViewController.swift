@@ -20,7 +20,6 @@ extension GifViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLogic()
-        setupUI()
     }
 }
 
@@ -54,8 +53,6 @@ private extension GifViewController {
                     self?.gifActivityView.stop()
                 }
             }
-            
-            
         }
     }
 }

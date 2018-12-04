@@ -139,9 +139,8 @@ private extension ImageManager {
         localImage.smallImagePath = image.smallImage
         localImage.bigImagePath = image.bigImage
         localImage.weather = image.parameters?.weather
-        
+
         return localImage
     }
-    
     
 }

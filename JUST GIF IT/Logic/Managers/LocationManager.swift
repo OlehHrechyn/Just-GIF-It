@@ -92,8 +92,7 @@ extension LocationManager: CLLocationManagerDelegate {
         locationManager.delegate = nil
         if let locationCompletion = locationCompletion {
             locationCompletion(location)
-        }
-        
+        }  
     }
     
 }
